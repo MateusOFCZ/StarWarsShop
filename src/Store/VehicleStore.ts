@@ -1,12 +1,14 @@
-import { makeAutoObservable, observable, computed } from 'mobx';
+import { observable, action } from 'mobx';
 
 export class VehicleStoreClass {
-    private VehicleInfos = {};
+    @observable VehicleInfos = {};
 
+    @action
     ClearInfos() {
         this.VehicleInfos = {};
     }
 
+    @action
     SaveInfos(Infos: any) {
         this.VehicleInfos = Infos;
     }
