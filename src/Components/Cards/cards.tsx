@@ -9,12 +9,12 @@ import {
 import {
     ShoppingBag
 } from '@mui/icons-material';
-import Config from '../../Assets/config.json';
 
 import Theme from '../../Assets/theme';
+
 import './styles.css';
 
-interface Data {
+interface CardsData {
     VehicleInfos: {
         name: String,
         model: String,
@@ -30,37 +30,37 @@ interface Data {
     },
 }
 
-export default function Cards(prop: Data) {
+export default function Cards(prop: CardsData) {
     return (
         <div className='Card'>
             <ThemeProvider theme={Theme}>
                 <Card sx={{ maxWidth: 345 }}>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {prop.VehicleInfos.name} - {prop.VehicleInfos.model}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        <p>O veículo {prop.VehicleInfos.name} de modelo {prop.VehicleInfos.model}{prop.VehicleInfos.manufacturer != 'unknown' && ` foi fabricado por ${prop.VehicleInfos.manufacturer}`}{prop.VehicleInfos.length != 'unknown' && ` possuí um comprimento de ${prop.VehicleInfos.length} metros`}.</p>
-                        {
-                            parseInt(prop.VehicleInfos.crew.toString()) > 0 || parseInt(prop.VehicleInfos.passengers.toString()) > 0 &&
-                            <p>
-                                {
-                                parseInt(prop.VehicleInfos.crew.toString()) == 0 ?
-                                    `Não é necessário nenhuma pessoa`
-                                :
-                                parseInt(prop.VehicleInfos.crew.toString()) > 1 ?
-                                    `É necessário ${prop.VehicleInfos.crew} pessoas`
-                                :
-                                    `É necessário ${prop.VehicleInfos.crew} pessoa`
-                                } para operar ou pilotar, e possuí capacidade para {prop.VehicleInfos.passengers} passageiros.</p>
-                        }
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small" variant="contained" endIcon={<ShoppingBag />} onClick={(e) => console.log(prop.VehicleInfos)}>Comprar</Button>
-                </CardActions>
-            </Card>
-        </ThemeProvider>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {prop.VehicleInfos.name} - {prop.VehicleInfos.model}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            <p>O veículo {prop.VehicleInfos.name} de modelo {prop.VehicleInfos.model}{prop.VehicleInfos.manufacturer != 'unknown' && ` foi fabricado por ${prop.VehicleInfos.manufacturer}`}{prop.VehicleInfos.length != 'unknown' && ` possuí um comprimento de ${prop.VehicleInfos.length} metros`}.</p>
+                            {
+                                parseInt(prop.VehicleInfos.crew.toString()) > 0 || parseInt(prop.VehicleInfos.passengers.toString()) > 0 &&
+                                <p>
+                                    {
+                                        parseInt(prop.VehicleInfos.crew.toString()) == 0 ?
+                                            `Não é necessário nenhuma pessoa`
+                                            :
+                                            parseInt(prop.VehicleInfos.crew.toString()) > 1 ?
+                                                `É necessário ${prop.VehicleInfos.crew} pessoas`
+                                                :
+                                                `É necessário ${prop.VehicleInfos.crew} pessoa`
+                                    } para operar ou pilotar, e possuí capacidade para {prop.VehicleInfos.passengers} passageiros.</p>
+                            }
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" variant="contained" endIcon={<ShoppingBag />} onClick={(e) => console.log(prop.VehicleInfos)}>Comprar</Button>
+                    </CardActions>
+                </Card>
+            </ThemeProvider>
         </div >
     );
 }
