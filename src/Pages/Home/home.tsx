@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import {
-  AppBar,
   Box,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Toolbar,
-  Typography,
-  Button,
   Pagination,
   ThemeProvider
 } from '@mui/material';
@@ -71,19 +61,25 @@ export default function Home() {
       <ThemeProvider theme={Theme}>
         <Menu />
         <Toolbar />
-        {
-          vehiclesPage.length > 0 &&
-          <Box>
-            {
-              vehiclesPage[currentPage].map((vehicle: any) => {
-                return (
-                  <Cards VehicleInfos={vehicle}/>
-                )
-              })
-            }
-            <Pagination count={page} page={currentPage} onChange={handleChangePage} />
-          </Box>
-        }
+        <Box className='content'>
+          {
+            vehiclesPage.length > 0 ?
+              <Box className='vehicles_list'>
+                {
+                  vehiclesPage[currentPage].map((vehicle: any) => {
+                    return (
+                      <Cards VehicleInfos={vehicle} />
+                    )
+                  })
+                }
+              </Box>
+              :
+              <Box>
+                Nenhum veículo disponível
+              </Box>
+          }
+        </Box>
+        <Pagination className='pagination' count={page} page={currentPage} onChange={handleChangePage} />
       </ThemeProvider>
     </div>
   );

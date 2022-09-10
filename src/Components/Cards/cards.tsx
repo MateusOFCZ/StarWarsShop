@@ -34,12 +34,12 @@ export default function Cards(prop: CardsData) {
     return (
         <div className='Card'>
             <ThemeProvider theme={Theme}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ height: 300, width: 380 }}>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h5" component="div" sx={{ height: 80 }}>
                             {prop.VehicleInfos.name} - {prop.VehicleInfos.model}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" sx={{ height: 125 }}>
                             <p>O veículo {prop.VehicleInfos.name} de modelo {prop.VehicleInfos.model}{prop.VehicleInfos.manufacturer != 'unknown' && ` foi fabricado por ${prop.VehicleInfos.manufacturer}`}{prop.VehicleInfos.length != 'unknown' && ` possuí um comprimento de ${prop.VehicleInfos.length} metros`}.</p>
                             {
                                 parseInt(prop.VehicleInfos.crew.toString()) > 0 || parseInt(prop.VehicleInfos.passengers.toString()) > 0 &&
