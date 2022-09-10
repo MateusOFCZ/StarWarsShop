@@ -17,12 +17,12 @@ import {
 import Menu from '../../Components/Menu/menu';
 import './styles.css';
 
-export default function Cart() {
+export default function Checkout() {
   return (
-    <div className='Home'>
+    <div className='Checkout'>
       <Menu/>
       <Toolbar/>
-      Cart
+      Checkout
     </div>
   );
 }

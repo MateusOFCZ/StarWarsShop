@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import './index.css';
-import Cart from './Pages/Cart/cart';
+import Checkout from './Pages/Checkout/checkout';
 
 import Home from './Pages/Home/home';
 
@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <HashRouter basename="/">
     <Routes>
-    <Route path="/cart" element={<Cart />} />
+    <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<Home />} />
     </Routes>
   </HashRouter>
