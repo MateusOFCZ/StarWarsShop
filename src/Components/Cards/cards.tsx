@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
     Card,
     CardActions,
@@ -11,8 +12,9 @@ import {
 } from '@mui/icons-material';
 
 import Theme from '../../Assets/theme';
-
 import './styles.css';
+
+import { VehicleStoreFunction } from '../../Store/VehicleStore';
 
 interface CardsData {
     VehicleInfos: {
@@ -31,6 +33,14 @@ interface CardsData {
 }
 
 export default function Cards(prop: CardsData) {
+    const Navigate = useNavigate();
+    const VehicleStore = VehicleStoreFunction();
+
+    const BuyVehicle = async (VehicleData: any) => {
+        await VehicleStore?.SaveInfos(VehicleData);
+        Navigate('/checkout');
+    }
+
     return (
         <div className='Card'>
             <ThemeProvider theme={Theme}>
@@ -57,7 +67,7 @@ export default function Cards(prop: CardsData) {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="contained" endIcon={<ShoppingBag />} onClick={(e) => console.log(prop.VehicleInfos)}>Comprar</Button>
+                        <Button size="small" variant="contained" endIcon={<ShoppingBag />} onClick={(e) => BuyVehicle(prop.VehicleInfos)}>Comprar</Button>
                     </CardActions>
                 </Card>
             </ThemeProvider>

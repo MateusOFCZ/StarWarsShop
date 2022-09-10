@@ -14,11 +14,15 @@ import './styles.css';
 import Menu from '../../Components/Menu/menu';
 import Cards from '../../Components/Cards/cards';
 
+import { VehicleStoreFunction } from '../../Store/VehicleStore';
+
 interface IPage {
   Pages: Array<Array<Object>>
 }
 
 export default function Home() {
+  const VehicleStore = VehicleStoreFunction();
+
   const [vehiclesPage, setVehiclesPage] = useState(Array<Array<Object>>);
   const [currentPage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(1);
@@ -47,6 +51,8 @@ export default function Home() {
 
       setVehiclesPage(localPage);
       setPage(localPage.length - 1);
+      VehicleStore?.ClearInfos();
+
       setDidMounted(true);
     });
   }

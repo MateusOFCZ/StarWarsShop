@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <HashRouter basename="/">
     <Routes>
-    <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<Home />} />
     </Routes>
   </HashRouter>

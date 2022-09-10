@@ -13,7 +13,7 @@ import Theme from '../../Assets/theme';
 import './styles.css';
 
 export default function Menu() {
-    const navigate = useNavigate();
+    const Navigate = useNavigate();
 
     return (
         <div className='Menu'>
@@ -26,10 +26,10 @@ export default function Menu() {
                                 component='div'
                                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                             >
-                                <img width='auto' height={50} src={`${Config.baseUrl}/assets/Logo.png`} onClick={(e) => navigate('/')} />
+                                <img width='auto' height={50} src={`${Config.baseUrl}/assets/Logo.png`} onClick={(e) => Navigate('/')} />
                             </Typography>
                             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                <Button sx={{ color: '#FFFFFF' }} onClick={(e) => navigate('/')}>
+                                <Button sx={{ color: '#FFFFFF' }} onClick={(e) => Navigate('/')}>
                                     Início
                                 </Button>
                             </Box>
