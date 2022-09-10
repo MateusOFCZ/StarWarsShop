@@ -35,14 +35,11 @@ export default function Menu() {
                                 component='div'
                                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                             >
-                                <img width='auto' height={50} src={`${Config.baseUrl}/assets/Logo.png`} />
+                                <img width='auto' height={50} src={`${Config.baseUrl}/assets/Logo.png`} onClick={(e) => navigate('/')} />
                             </Typography>
                             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                 <Button sx={{ color: '#FFFFFF' }} onClick={(e) => navigate('/')}>
                                     Início
-                                </Button>
-                                <Button sx={{ color: '#FFFFFF' }} onClick={(e) => navigate('/cart')}>
-                                    Carrinho
                                 </Button>
                             </Box>
                         </Toolbar>
