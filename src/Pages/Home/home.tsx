@@ -23,9 +23,8 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(1);
   const [didMounted, setDidMounted] = useState(false);
-  componentDidMount();
 
-  function componentDidMount() {
+  const componentDidMount = () => {
     if (didMounted) return;
     Vehicles.find().then((vehicles: any) => {
       const localPage: IPage['Pages'] = [[]];
@@ -51,6 +50,8 @@ export default function Home() {
       setDidMounted(true);
     });
   }
+
+  componentDidMount();
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
