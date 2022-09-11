@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
+  Snackbar,
+  Alert,
   Box,
   Toolbar,
   Pagination,
@@ -21,12 +24,23 @@ interface IPage {
 }
 
 export default function Home() {
+  const Location = useLocation();
+  const Navigate = useNavigate();
+
   const VehicleStore = VehicleStoreFunction();
+  const [openSuccess, setOpenSuccess] = useState(false);
 
   const [vehiclesPage, setVehiclesPage] = useState(Array<Array<Object>>);
   const [currentPage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(1);
   const [didMounted, setDidMounted] = useState(false);
+
+  useEffect(() => {
+    if (Location.pathname.slice(1) == 'success') {
+      Navigate('/');
+      setOpenSuccess(true);
+    }
+  }, []);
 
   const componentDidMount = () => {
     if (didMounted) return;
@@ -66,6 +80,11 @@ export default function Home() {
   return (
     <div className='Home'>
       <ThemeProvider theme={Theme}>
+        <Snackbar open={openSuccess} autoHideDuration={6000} onClose={() => setOpenSuccess(false)}>
+          <Alert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+            Pedido efetuado com sucesso!
+          </Alert>
+        </Snackbar>
         <Menu />
         <Toolbar />
         <Box className='content'>

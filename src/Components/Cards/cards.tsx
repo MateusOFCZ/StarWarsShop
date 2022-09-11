@@ -44,7 +44,7 @@ export default function Cards(prop: CardsData) {
     return (
         <div className='Card'>
             <ThemeProvider theme={Theme}>
-                <Card sx={{ height: 300, width: 380 }}>
+                <Card sx={{ height: 325, width: 380 }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" sx={{ height: 80 }}>
                             {prop.VehicleInfos.name} - {prop.VehicleInfos.model}
@@ -64,6 +64,9 @@ export default function Cards(prop: CardsData) {
                                                 `É necessário ${prop.VehicleInfos.crew} pessoa`
                                     } para operar ou pilotar, e possuí capacidade para {prop.VehicleInfos.passengers} passageiros.</p>
                             }
+                        </Typography>
+                        <Typography variant="h6">
+                            R$1.000,00
                         </Typography>
                     </CardContent>
                     <CardActions>
