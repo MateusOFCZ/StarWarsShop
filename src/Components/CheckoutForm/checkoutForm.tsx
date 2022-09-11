@@ -47,7 +47,7 @@ export default function CheckoutForm() {
     return (
         <div className='CheckoutForm'>
             <ThemeProvider theme={Theme}>
-                <Box sx={{ background: Theme.palette.secondary.main, padding: 1, height: 650 }}>
+                <Box sx={{ background: Theme.palette.secondary.main, padding: 1, height: `${Formik.values.paymentType === 'creditCard' ? 650 : 300}` }}>
                     <form onSubmit={Formik.handleSubmit}>
                         <Typography variant='h5'>
                             Informações Pessoais
@@ -130,37 +130,42 @@ export default function CheckoutForm() {
                             </Grid>
                         </Box>
 
-                        <Box sx={{ marginTop: 3, marginBottom: 2 }}>
-                            <Divider />
-                        </Box>
+                        {
+                            Formik.values.paymentType === 'creditCard' &&
+                            <Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 2 }}>
+                                    <Divider />
+                                </Box>
 
-                        <Typography variant='h5'>
-                            Dados do Cartão de Crédito
-                        </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField className='text_field' fullWidth id='cardNumber' name='cardNumber' label='Número do Cartão' variant='standard' onChange={Formik.handleChange} value={Formik.values.cardNumber} />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField className='text_field' fullWidth id='name' name='name' label='Nome Impresso' variant='standard' onChange={Formik.handleChange} value={Formik.values.name} />
-                                </Grid>
-                            </Grid>
-                        </Box>
+                                <Typography variant='h5'>
+                                    Dados do Cartão de Crédito
+                                </Typography>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField className='text_field' fullWidth id='cardNumber' name='cardNumber' label='Número do Cartão' variant='standard' onChange={Formik.handleChange} value={Formik.values.cardNumber} />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField className='text_field' fullWidth id='name' name='name' label='Nome Impresso' variant='standard' onChange={Formik.handleChange} value={Formik.values.name} />
+                                        </Grid>
+                                    </Grid>
+                                </Box>
 
-                        <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={4}>
-                                    <TextField className='text_field' fullWidth id='validMonth' name='validMonth' label='Mês' variant='standard' onChange={Formik.handleChange} value={Formik.values.validMonth} />
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
-                                    <TextField className='text_field' fullWidth id='validYear' name='validYear' label='Ano' variant='standard' onChange={Formik.handleChange} value={Formik.values.validYear} />
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
-                                    <TextField className='text_field' fullWidth id='cvc' name='cvc' label='CVV' variant='standard' onChange={Formik.handleChange} value={Formik.values.cvc} />
-                                </Grid>
-                            </Grid>
-                        </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} sm={4}>
+                                            <TextField className='text_field' fullWidth id='validMonth' name='validMonth' label='Mês' variant='standard' onChange={Formik.handleChange} value={Formik.values.validMonth} />
+                                        </Grid>
+                                        <Grid item xs={12} sm={4}>
+                                            <TextField className='text_field' fullWidth id='validYear' name='validYear' label='Ano' variant='standard' onChange={Formik.handleChange} value={Formik.values.validYear} />
+                                        </Grid>
+                                        <Grid item xs={12} sm={4}>
+                                            <TextField className='text_field' fullWidth id='cvc' name='cvc' label='CVV' variant='standard' onChange={Formik.handleChange} value={Formik.values.cvc} />
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            </Box>
+                        }
 
                         <Box sx={{ marginTop: 3, marginBottom: 3 }}>
                             <Button fullWidth variant='contained' type={'submit'}>Confirmar Compra</Button>
