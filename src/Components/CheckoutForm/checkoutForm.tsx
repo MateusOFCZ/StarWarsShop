@@ -16,10 +16,11 @@ import {
 import { IMaskInput } from 'react-imask';
 import * as Yup from 'yup';
 
+import ValidationShape from '../../Assets/Form/ValidationShapes';
 import Theme from '../../Assets/theme';
 import './styles.css';
 
-const FormValidationSchema = Yup.object({
+/*const FormValidationSchema = Yup.object().shape({
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
     email: Yup.string().required(),
@@ -63,7 +64,7 @@ const FormValidationSchema = Yup.object({
         is: 'creditCard',
         then: Yup.string().required()
     }),
-});
+});*/
 
 interface TextField_Props {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -214,7 +215,7 @@ export default function CheckoutForm() {
             name: '',
             cvc: ''
         },
-        validationSchema: FormValidationSchema,
+        validationSchema: ValidationShape,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
