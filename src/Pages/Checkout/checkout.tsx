@@ -6,7 +6,6 @@ import {
   Toolbar,
   Typography,
   Grid,
-  Button,
   ThemeProvider
 } from '@mui/material';
 
@@ -18,30 +17,6 @@ import Menu from '../../Components/Menu/menu';
 import CheckoutForm from '../../Components/CheckoutForm/checkoutForm';
 
 import { VehicleStoreFunction } from '../../Store/VehicleStore';
-
-interface FormData {
-  firstName: String,
-  lastName: String,
-  email: String,
-  phone: String,
-  cpf: String,
-  cnpj: String,
-
-  postalCode: String,
-  address: String,
-  number: String,
-  complement: String,
-  city: String,
-  district: String,
-  uf: String,
-
-  paymentType: String,
-  cardNumber: String,
-  validMonth: String,
-  validYear: String,
-  name: String,
-  cvc: String
-}
 
 export default function Checkout() {
   const Navigate = useNavigate();
