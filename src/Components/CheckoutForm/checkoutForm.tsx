@@ -8,16 +8,62 @@ import {
     Grid,
     Input,
     InputLabel,
-    TextField,
     Select,
     MenuItem,
     Button,
     ThemeProvider
 } from '@mui/material';
 import { IMaskInput } from 'react-imask';
+import * as Yup from 'yup';
 
 import Theme from '../../Assets/theme';
 import './styles.css';
+
+const FormValidationSchema = Yup.object({
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
+    email: Yup.string().required(),
+    phone: Yup.string().required(),
+    costumerType: Yup.string().required(),
+    cpf: Yup.string().when("costumerType", {
+        is: 'pf',
+        then: Yup.string().required()
+    }),
+    cnpj: Yup.string().when("costumerType", {
+        is: 'pj',
+        then: Yup.string().required()
+    }),
+
+    postalCode: Yup.string().required(),
+    address: Yup.string().required(),
+    number: Yup.string().required(),
+    complement: Yup.string().required(),
+    city: Yup.string().required(),
+    district: Yup.string().required(),
+    uf: Yup.string().required(),
+
+    paymentType: Yup.string().required(),
+    cardNumber: Yup.string().when("paymentType", {
+        is: 'creditCard',
+        then: Yup.string().required()
+    }),
+    validMonth: Yup.string().when("paymentType", {
+        is: 'creditCard',
+        then: Yup.string().required()
+    }),
+    validYear: Yup.string().when("paymentType", {
+        is: 'creditCard',
+        then: Yup.string().required()
+    }),
+    name: Yup.string().when("paymentType", {
+        is: 'creditCard',
+        then: Yup.string().required()
+    }),
+    cvc: Yup.string().when("paymentType", {
+        is: 'creditCard',
+        then: Yup.string().required()
+    }),
+});
 
 interface TextField_Props {
     onChange: (event: { target: { name: string; value: string } }) => void;
@@ -31,6 +77,20 @@ const TextField_CPFMask = React.forwardRef<HTMLElement, TextField_Props>(
             <IMaskInput
                 {...other}
                 mask='000.000.000-00'
+                onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+                overwrite
+            />
+        );
+    },
+);
+
+const TextField_CNPJMask = React.forwardRef<HTMLElement, TextField_Props>(
+    function TextField_CNPJMask(props) {
+        const { onChange, ...other } = props;
+        return (
+            <IMaskInput
+                {...other}
+                mask='00.000.000/0000-00'
                 onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
                 overwrite
             />
@@ -135,6 +195,7 @@ export default function CheckoutForm() {
             lastName: '',
             email: '',
             phone: '',
+            costumerType: 'pf',
             cpf: '',
             cnpj: '',
 
@@ -153,6 +214,7 @@ export default function CheckoutForm() {
             name: '',
             cvc: ''
         },
+        validationSchema: FormValidationSchema,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
@@ -226,15 +288,37 @@ export default function CheckoutForm() {
 
                         <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
                             <Grid container spacing={2}>
-                                <Grid item xs={12} sm={4}>
-                                    <InputLabel className='input_label' htmlFor='cpf'>CPF</InputLabel>
-                                    <Input className='text_field' id='cpf' name='cpf' inputComponent={TextField_CPFMask as any} value={Formik.values.cpf} onChange={Formik.handleChange} />
+                                <Grid item xs={12} sm={6}>
+                                    <InputLabel className='input_label' htmlFor='costumerType'>Tipo de Pessoa</InputLabel>
+                                    <Select className='select_field' fullWidth id='costumerType' name='costumerType' onChange={Formik.handleChange} value={Formik.values.costumerType}>
+                                        <MenuItem value={'pf'}>Pessoa Física</MenuItem>
+                                        <MenuItem value={'pj'}>Pessoa Jurídica</MenuItem>
+                                    </Select>
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                {
+                                    Formik.values.costumerType === 'pf' &&
+                                    <Grid item xs={12} sm={6}>
+                                        <InputLabel className='input_label' htmlFor='cpf'>CPF</InputLabel>
+                                        <Input className='text_field' id='cpf' name='cpf' inputComponent={TextField_CPFMask as any} value={Formik.values.cpf} onChange={Formik.handleChange} />
+                                    </Grid>
+                                }
+                                {
+                                    Formik.values.costumerType === 'pj' &&
+                                    <Grid item xs={12} sm={6}>
+                                        <InputLabel className='input_label' htmlFor='cnpj'>CNPJ</InputLabel>
+                                        <Input className='text_field' id='cnpj' name='cnpj' inputComponent={TextField_CNPJMask as any} value={Formik.values.cnpj} onChange={Formik.handleChange} />
+                                    </Grid>
+                                }
+                            </Grid>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'center', width: 700 }}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
                                     <InputLabel className='input_label' htmlFor='phone'>Telefone</InputLabel>
                                     <Input className='text_field' id='phone' name='phone' inputComponent={TextField_PhoneMask as any} value={Formik.values.phone} onChange={Formik.handleChange} />
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                <Grid item xs={12} sm={6}>
                                     <InputLabel className='input_label' htmlFor='email'>E-mail</InputLabel>
                                     <Input type='email' className='text_field' id='email' name='email' fullWidth value={Formik.values.email} onChange={Formik.handleChange} />
                                 </Grid>
@@ -339,7 +423,7 @@ export default function CheckoutForm() {
                                             <Input className='text_field' id='validYear' name='validYear' inputComponent={TextField_ValidMonthYearMask as any} value={Formik.values.validYear} onChange={Formik.handleChange} />
                                         </Grid>
                                         <Grid item xs={12} sm={4}>
-                                        <InputLabel className='input_label' htmlFor='cvc'>CVC</InputLabel>
+                                            <InputLabel className='input_label' htmlFor='cvc'>CVC</InputLabel>
                                             <Input className='text_field' id='cvc' name='cvc' inputComponent={TextField_CVCMask as any} value={Formik.values.cvc} onChange={Formik.handleChange} />
                                         </Grid>
                                     </Grid>
