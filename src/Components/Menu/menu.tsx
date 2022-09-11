@@ -26,7 +26,7 @@ export default function Menu() {
                                 component='div'
                                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                             >
-                                <img width='auto' height={50} src={`${Config.baseUrl}/assets/Logo.png`} onClick={(e) => Navigate('/')} />
+                                <img width='auto' height={50} src={`https://raw.githubusercontent.com/MateusOFCZ/StarWarsShop/master/public/assets/Logo.png`} onClick={(e) => Navigate('/')} />
                             </Typography>
                             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                 <Button sx={{ color: '#FFFFFF' }} onClick={(e) => Navigate('/')}>
