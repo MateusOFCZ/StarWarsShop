@@ -1,0 +1,7 @@
+.CheckoutForm {
+    height: 100%;
+}
+
+.CheckoutForm .text_field {
+    display: block;
+}

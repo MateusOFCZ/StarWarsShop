@@ -67,7 +67,7 @@ export default function Cards(prop: CardsData) {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="contained" endIcon={<ShoppingBag />} onClick={(e) => BuyVehicle(prop.VehicleInfos)}>Comprar</Button>
+                        <Button size='small' variant='contained' endIcon={<ShoppingBag />} onClick={(e) => BuyVehicle(prop.VehicleInfos)}>Comprar</Button>
                     </CardActions>
                 </Card>
             </ThemeProvider>
