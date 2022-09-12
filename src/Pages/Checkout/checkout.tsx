@@ -9,7 +9,6 @@ import {
   ThemeProvider
 } from '@mui/material';
 
-import Config from '../../Assets/config.json';
 import Theme from '../../Assets/theme';
 import './styles.css';
 

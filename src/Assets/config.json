@@ -1,4 +1,4 @@
 {
-    "baseUrl": "https://mateusofcz.github.io/StarWarsShop/#/",
+    "baseUrl": "localhost",
     "perPage": 6
 }
