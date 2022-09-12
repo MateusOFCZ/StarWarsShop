@@ -1,6 +1,10 @@
-import { observable, action } from 'mobx';
+import { observable, action, makeAutoObservable } from 'mobx';
 
 export class VehicleStoreClass {
+    constructor() {
+        makeAutoObservable(this);
+    }
+
     @observable VehicleInfos = {
         name: String,
         model: String,

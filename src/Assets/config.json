@@ -1,4 +1,5 @@
 {
     "baseUrl": "localhost",
-    "perPage": 6
+    "perPage": 8,
+    "gridColumns": 4
 }

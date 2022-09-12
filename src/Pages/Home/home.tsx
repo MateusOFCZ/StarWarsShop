@@ -28,6 +28,7 @@ export default function Home() {
   const Navigate = useNavigate();
 
   const VehicleStore = VehicleStoreFunction();
+  const [columnTemplate, setColumnTemplate] = useState('1fr');
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const [vehiclesPage, setVehiclesPage] = useState(Array<Array<Object>>);
@@ -36,7 +37,7 @@ export default function Home() {
   const [didMounted, setDidMounted] = useState(false);
 
   useEffect(() => {
-    if (Location.pathname.slice(1) == 'success') {
+    if (Location.pathname.slice(1) === 'success') {
       Navigate('/');
       setOpenSuccess(true);
     }
@@ -44,6 +45,7 @@ export default function Home() {
 
   const componentDidMount = () => {
     if (didMounted) return;
+
     Vehicles.find().then((vehicles: any) => {
       const localPage: IPage['Pages'] = [[]];
       let pageIndex = 0;
@@ -66,6 +68,18 @@ export default function Home() {
       setVehiclesPage(localPage);
       setPage(localPage.length - 1);
       VehicleStore?.ClearInfos();
+
+      let iColumn = 1;
+      let newColumnTemplate = '';
+      while (iColumn <= Config.gridColumns) {
+        newColumnTemplate = newColumnTemplate + ' 1fr';
+
+        iColumn++;
+      }
+
+      setColumnTemplate(newColumnTemplate);
+
+      console.log(columnTemplate);
 
       setDidMounted(true);
     });
@@ -90,7 +104,7 @@ export default function Home() {
         <Box className='content'>
           {
             vehiclesPage.length > 0 ?
-              <Box className='vehicles_list'>
+              <Box className='vehicles_list' sx={{ gridTemplateColumns: columnTemplate }}>
                 {
                   vehiclesPage[currentPage].map((vehicle: any) => {
                     return (
