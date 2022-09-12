@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import './index.css';
+import './Assets/styles.css';
 import Checkout from './Pages/Checkout/checkout';
 
 import Home from './Pages/Home/home';
