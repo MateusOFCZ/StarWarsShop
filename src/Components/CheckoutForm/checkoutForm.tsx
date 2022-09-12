@@ -12,8 +12,6 @@ import {
     Select,
     MenuItem,
     Button,
-    Alert,
-    Snackbar,
     ThemeProvider
 } from '@mui/material';
 import { IMaskInput } from 'react-imask';
@@ -52,7 +50,7 @@ const FormValidationSchema = Yup.object().shape({
     }),
     validMonth: Yup.number().when('paymentType', {
         is: 'creditCard',
-        then: Yup.number().required('<span style="color: #FF0000">Campo Obrigatório</span>').lessThan(13, 'O mês deve ser entre 01 e 12').min(2, 'O mês deve conter 2 dígitos (Se for de 1 a 9 acrescentar \"0\" na frente)')
+        then: Yup.number().required('<span style="color: #FF0000">Campo Obrigatório</span>').lessThan(13, 'O mês deve ser entre 1 e 12').moreThan(0, 'O mês deve ser entre 1 e 12'),
     }),
     validYear: Yup.number().when('paymentType', {
         is: 'creditCard',
@@ -289,12 +287,12 @@ export default function CheckoutForm() {
                             <Grid item xs={12} sm={6}>
                                 <InputLabel className='input_label' htmlFor='firstName'>Nome</InputLabel>
                                 <Input className='text_field' id='firstName' name='firstName' fullWidth value={formik.values.firstName} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.firstName != undefined && formik.touched.firstName ? formik.errors.firstName : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.firstName !== undefined && formik.touched.firstName ? formik.errors.firstName : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <InputLabel className='input_label' htmlFor='lastName'>Sobrenome</InputLabel>
                                 <Input className='text_field' id='lastName' name='lastName' fullWidth value={formik.values.lastName} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.lastName != undefined && formik.touched.lastName ? formik.errors.lastName : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.lastName !== undefined && formik.touched.lastName ? formik.errors.lastName : ''}` }} />
                             </Grid>
                         </Grid>
                     </Box>
@@ -307,14 +305,14 @@ export default function CheckoutForm() {
                                     <MenuItem value={'pf'}>Pessoa Física</MenuItem>
                                     <MenuItem value={'pj'}>Pessoa Jurídica</MenuItem>
                                 </Select>
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.costumerType != undefined && formik.touched.costumerType ? formik.errors.costumerType : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.costumerType !== undefined && formik.touched.costumerType ? formik.errors.costumerType : ''}` }} />
                             </Grid>
                             {
                                 formik.values.costumerType === 'pf' &&
                                 <Grid item xs={12} sm={6}>
                                     <InputLabel className='input_label' htmlFor='cpf'>CPF</InputLabel>
                                     <Input className='text_field' id='cpf' name='cpf' inputComponent={TextField_CPFMask as any} value={formik.values.cpf} onChange={formik.handleChange} />
-                                    <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cpf != undefined && formik.touched.cpf ? formik.errors.cpf : ''}` }} />
+                                    <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cpf !== undefined && formik.touched.cpf ? formik.errors.cpf : ''}` }} />
                                 </Grid>
                             }
                             {
@@ -322,7 +320,7 @@ export default function CheckoutForm() {
                                 <Grid item xs={12} sm={6}>
                                     <InputLabel className='input_label' htmlFor='cnpj'>CNPJ</InputLabel>
                                     <Input className='text_field' id='cnpj' name='cnpj' inputComponent={TextField_CNPJMask as any} value={formik.values.cnpj} onChange={formik.handleChange} />
-                                    <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cnpj != undefined && formik.touched.cnpj ? formik.errors.cnpj : ''}` }} />
+                                    <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cnpj !== undefined && formik.touched.cnpj ? formik.errors.cnpj : ''}` }} />
                                 </Grid>
                             }
                         </Grid>
@@ -333,12 +331,12 @@ export default function CheckoutForm() {
                             <Grid item xs={12} sm={6}>
                                 <InputLabel className='input_label' htmlFor='phone'>Telefone</InputLabel>
                                 <Input className='text_field' id='phone' name='phone' inputComponent={TextField_PhoneMask as any} value={formik.values.phone} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.phone != undefined && formik.touched.phone ? formik.errors.phone : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.phone !== undefined && formik.touched.phone ? formik.errors.phone : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <InputLabel className='input_label' htmlFor='email'>E-mail</InputLabel>
                                 <Input type='email' className='text_field' id='email' name='email' fullWidth value={formik.values.email} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.email != undefined && formik.touched.email ? formik.errors.email : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.email !== undefined && formik.touched.email ? formik.errors.email : ''}` }} />
                             </Grid>
                         </Grid>
                     </Box>
@@ -355,17 +353,17 @@ export default function CheckoutForm() {
                             <Grid item xs={12} sm={4}>
                                 <InputLabel className='input_label' htmlFor='postalCode'>CEP</InputLabel>
                                 <Input className='text_field' id='postalCode' name='postalCode' inputComponent={TextField_PostalCodeMask as any} value={formik.values.postalCode} onChange={formik.handleChange} onKeyUp={getAddress} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.postalCode != undefined && formik.touched.postalCode ? formik.errors.postalCode : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.postalCode !== undefined && formik.touched.postalCode ? formik.errors.postalCode : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <InputLabel className='input_label' htmlFor='complement'>Complemento</InputLabel>
                                 <Input className='text_field' id='complement' name='complement' fullWidth value={formik.values.complement} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.complement != undefined && formik.touched.complement ? formik.errors.complement : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.complement !== undefined && formik.touched.complement ? formik.errors.complement : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={2}>
                                 <InputLabel className='input_label' htmlFor='number'>Número</InputLabel>
                                 <Input className='text_field' id='number' name='number' inputComponent={TextField_NumberMask as any} value={formik.values.number} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.number != undefined && formik.touched.number ? formik.errors.number : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.number !== undefined && formik.touched.number ? formik.errors.number : ''}` }} />
                             </Grid>
                         </Grid>
                     </Box>
@@ -375,22 +373,22 @@ export default function CheckoutForm() {
                             <Grid item xs={12} sm={4}>
                                 <InputLabel className='input_label' htmlFor='address'>Logradouro</InputLabel>
                                 <Input disabled={!(cepInformed && hasAddress)} className='text_field' id='address' name='address' fullWidth value={formik.values.address} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.address != undefined && formik.touched.address ? formik.errors.address : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.address !== undefined && formik.touched.address ? formik.errors.address : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <InputLabel className='input_label' htmlFor='city'>Cidade</InputLabel>
                                 <Input disabled={!(cepInformed && hasCity)} className='text_field' id='city' name='city' fullWidth value={formik.values.city} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.city != undefined && formik.touched.city ? formik.errors.city : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.city !== undefined && formik.touched.city ? formik.errors.city : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={3}>
                                 <InputLabel className='input_label' htmlFor='district'>Bairro</InputLabel>
                                 <Input disabled={!(cepInformed && hasDistrict)} className='text_field' id='district' name='district' fullWidth value={formik.values.district} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.district != undefined && formik.touched.district ? formik.errors.district : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.district !== undefined && formik.touched.district ? formik.errors.district : ''}` }} />
                             </Grid>
                             <Grid item xs={12} sm={2}>
                                 <InputLabel className='input_label' htmlFor='uf'>UF</InputLabel>
                                 <Input disabled={!(cepInformed && hasUF)} className='text_field' id='uf' name='uf' fullWidth value={formik.values.uf} onChange={formik.handleChange} />
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.uf != undefined && formik.touched.uf ? formik.errors.uf : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.uf !== undefined && formik.touched.uf ? formik.errors.uf : ''}` }} />
                             </Grid>
                         </Grid>
                     </Box>
@@ -409,7 +407,7 @@ export default function CheckoutForm() {
                                     <MenuItem value={'boleto'}>Boleto</MenuItem>
                                     <MenuItem value={'creditCard'}>Cartão de Crédito</MenuItem>
                                 </Select>
-                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.paymentType != undefined && formik.touched.paymentType ? formik.errors.paymentType : ''}` }} />
+                                <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.paymentType !== undefined && formik.touched.paymentType ? formik.errors.paymentType : ''}` }} />
                             </Grid>
                         </Grid>
                     </Box>
@@ -429,12 +427,12 @@ export default function CheckoutForm() {
                                     <Grid item xs={12} sm={6}>
                                         <InputLabel className='input_label' htmlFor='cardNumber'>Número do Cartão</InputLabel>
                                         <Input className='text_field' id='cardNumber' name='cardNumber' inputComponent={TextField_CardNumberMask as any} value={formik.values.cardNumber} onChange={formik.handleChange} />
-                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cardNumber != undefined && formik.touched.cardNumber ? formik.errors.cardNumber : ''}` }} />
+                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cardNumber !== undefined && formik.touched.cardNumber ? formik.errors.cardNumber : ''}` }} />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <InputLabel className='input_label' htmlFor='name'>Nome Impresso</InputLabel>
                                         <Input className='text_field' id='name' name='name' fullWidth value={formik.values.name} onChange={formik.handleChange} />
-                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.name != undefined && formik.touched.name ? formik.errors.name : ''}` }} />
+                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.name !== undefined && formik.touched.name ? formik.errors.name : ''}` }} />
                                     </Grid>
                                 </Grid>
                             </Box>
@@ -444,18 +442,18 @@ export default function CheckoutForm() {
                                     <Grid item xs={12} sm={4}>
                                         <InputLabel className='input_label' htmlFor='validMonth'>Mês de Validade</InputLabel>
                                         <Input className='text_field' id='validMonth' name='validMonth' inputComponent={TextField_ValidMonthYearMask as any} value={formik.values.validMonth} onChange={formik.handleChange} />
-                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.validMonth != undefined && formik.touched.validMonth ? formik.errors.validMonth : ''}` }} />
+                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.validMonth !== undefined && formik.touched.validMonth ? formik.errors.validMonth : ''}` }} />
                                     </Grid>
 
                                     <Grid item xs={12} sm={4}>
                                         <InputLabel className='input_label' htmlFor='validYear'>Ano de Validade</InputLabel>
                                         <Input className='text_field' id='validYear' name='validYear' inputComponent={TextField_ValidMonthYearMask as any} value={formik.values.validYear} onChange={formik.handleChange} />
-                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.validYear != undefined && formik.touched.validYear ? formik.errors.validYear : ''}` }} />
+                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.validYear !== undefined && formik.touched.validYear ? formik.errors.validYear : ''}` }} />
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <InputLabel className='input_label' htmlFor='cvc'>CVC</InputLabel>
                                         <Input className='text_field' id='cvc' name='cvc' inputComponent={TextField_CVCMask as any} value={formik.values.cvc} onChange={formik.handleChange} />
-                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cvc != undefined && formik.touched.cvc ? formik.errors.cvc : ''}` }} />
+                                        <Box dangerouslySetInnerHTML={{ __html: `${formik.errors.cvc !== undefined && formik.touched.cvc ? formik.errors.cvc : ''}` }} />
                                     </Grid>
                                 </Grid>
                             </Box>

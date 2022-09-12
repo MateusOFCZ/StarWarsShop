@@ -30,7 +30,7 @@ export default function Checkout() {
   return (
     <div className='Checkout'>
       {
-        !!VehicleStore?.GetInfos && typeof VehicleStore?.GetInfos.name != 'function' &&
+        !!VehicleStore?.GetInfos && typeof VehicleStore?.GetInfos.name !== 'function' &&
         <ThemeProvider theme={Theme}>
           <Menu />
           <Toolbar />
@@ -66,7 +66,7 @@ export default function Checkout() {
                     Total
                   </Divider>
                   <Typography sx={{ textAlign: 'center' }}>
-                    {`${VehicleStore?.GetInfos.cost_in_credits.toString() != 'unknown' ? 'R$' + VehicleStore?.GetInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
+                    {`${VehicleStore?.GetInfos.cost_in_credits.toString() !== 'unknown' ? 'R$' + VehicleStore?.GetInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
                   </Typography>
                 </Box>
               </Grid>

@@ -50,12 +50,12 @@ export default function Cards(prop: CardsData) {
                             {prop.VehicleInfos.name} - {prop.VehicleInfos.model}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ height: 125 }}>
-                            <p>O veículo {prop.VehicleInfos.name} de modelo {prop.VehicleInfos.model}{prop.VehicleInfos.manufacturer != 'unknown' && ` foi fabricado por ${prop.VehicleInfos.manufacturer}`}{prop.VehicleInfos.length != 'unknown' && ` possuí um comprimento de ${prop.VehicleInfos.length} metros`}.</p>
+                            <p>O veículo {prop.VehicleInfos.name} de modelo {prop.VehicleInfos.model}{prop.VehicleInfos.manufacturer !== 'unknown' && ` foi fabricado por ${prop.VehicleInfos.manufacturer}`}{prop.VehicleInfos.length !== 'unknown' && ` possuí um comprimento de ${prop.VehicleInfos.length} metros`}.</p>
                             {
-                                parseInt(prop.VehicleInfos.crew.toString()) > 0 || parseInt(prop.VehicleInfos.passengers.toString()) > 0 &&
+                                (parseInt(prop.VehicleInfos.crew.toString()) > 0 || parseInt(prop.VehicleInfos.passengers.toString()) > 0) &&
                                 <p>
                                     {
-                                        parseInt(prop.VehicleInfos.crew.toString()) == 0 ?
+                                        parseInt(prop.VehicleInfos.crew.toString()) === 0 ?
                                             `Não é necessário nenhuma pessoa`
                                             :
                                             parseInt(prop.VehicleInfos.crew.toString()) > 1 ?
@@ -66,7 +66,7 @@ export default function Cards(prop: CardsData) {
                             }
                         </Typography>
                         <Typography variant="h6">
-                            {`${prop.VehicleInfos.cost_in_credits.toString() != 'unknown' ? 'R$' + prop.VehicleInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
+                            {`${prop.VehicleInfos.cost_in_credits.toString() !== 'unknown' ? 'R$' + prop.VehicleInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
                         </Typography>
                     </CardContent>
                     <CardActions>
