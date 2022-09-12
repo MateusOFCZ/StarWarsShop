@@ -66,7 +66,7 @@ export default function Checkout() {
                     Total
                   </Divider>
                   <Typography sx={{ textAlign: 'center' }}>
-                    R$1.000,00
+                    {`${VehicleStore?.GetInfos.cost_in_credits.toString() != 'unknown' ? 'R$' + VehicleStore?.GetInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
                   </Typography>
                 </Box>
               </Grid>

@@ -66,7 +66,7 @@ export default function Cards(prop: CardsData) {
                             }
                         </Typography>
                         <Typography variant="h6">
-                            R$1.000,00
+                            {`${prop.VehicleInfos.cost_in_credits.toString() != 'unknown' ? 'R$' + prop.VehicleInfos.cost_in_credits + ',00' : 'R$100000,00'}`}
                         </Typography>
                     </CardContent>
                     <CardActions>
