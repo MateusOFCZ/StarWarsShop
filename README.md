@@ -12,4 +12,4 @@ Site de venda dos veículos de Star Wars com validação de campos.
 
 - Para instalar as dependências utilize `npm install`.
 - Para rodar o projeto utilize `npm start`.
-- Você pode alterar a quantidade de itens por página no **[config.json](https://github.com/MateusOFCZ/StarWarsShop/blob/master/src/Assets/config.json)**.
+- Você pode alterar a quantidade de itens por página e colunas no **[config.json](https://github.com/MateusOFCZ/StarWarsShop/blob/master/src/Assets/config.json)**.
